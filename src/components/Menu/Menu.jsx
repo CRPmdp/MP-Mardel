@@ -9,9 +9,9 @@ const menuItems = [
   { path: "/investigaciones", icon: "investigaciones" },
   {
     path: "/reportes",
-    icon: "reportes",
+    icon: "Reportes",
   },
-  { path: "/gatillo-facil", icon: "gatillo" },
+  { path: "/gatillo-facil", icon: "Gatillo" },
   { path: "/ahora", icon: "AHORA" },
   {
     path: "https://open.spotify.com/show/1fhXtCulH39aZgv9P7WH7k",
@@ -29,7 +29,7 @@ const Menu = () => {
             <Icons
               icon={menuItem.icon}
               className={styles.icon}
-              iconSize="2.2rem"
+              iconSize="3rem"
             />
             <h5 className={styles.iconName}>{menuItem.icon}</h5>
           </Link>

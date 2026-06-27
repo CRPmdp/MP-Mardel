@@ -4,7 +4,7 @@
   left: 25px;
   z-index: 10;
   text-decoration: none;
-  color: var(--main-identidad);
+  color: var(--mardel-identidad);
   
   /* Flexbox consistente: El isotipo a la derecha, los textos a la izquierda */
   display: flex;

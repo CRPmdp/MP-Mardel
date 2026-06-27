@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. RESETES Y CONTENEDOR PRINCIPAL
+   1. RESETES Y CONTENEDOR PRINCIPAL (CONFIGURACIÓN CELULAR)
    ========================================================================== */
 .SelectionOverview h3,
 .SelectionOverview p {
@@ -8,16 +8,24 @@
 
 .SelectionOverview {
   position: fixed;
-  top: 200px;
-  right: 100px; /* 🎯 Sincronizado a la derecha en móviles */
+  /* 🚀 En celulares lo apoyamos abajo y bien centrado horizontalmente */
+  bottom: 220px; 
+  left: 4vw;
+  right: 4vw;
+  top: auto; /* Anulamos el top de 200px para que no flote arriba */
+  
   z-index: 1000;
   display: flex;
-  flex-direction: row;
+  /* 🚀 En mobile van hacia abajo (apilados) para aprovechar el ancho */
+  flex-direction: column; 
   gap: 10px;
-  height: 0;
+  height: auto;
+  max-height: 45vh; /* Evita que tape todo el mapa si hay mucho texto */
+  overflow-y: auto; /* Si el contenido es largo en un celu chico, permite scroll */
+  
   font-family: "Ronnia Thin Condensed", sans-serif;
   pointer-events: none;
-  --current-color: var(--current-color); /* Variable de color por defecto */
+  --current-color: var(--current-color);
   color: var(--current-color);
 }
 
@@ -29,16 +37,20 @@
   height: fit-content;
   min-height: fit-content;
   flex-shrink: 0;
-  background-color: rgba(10, 10, 10, 0.2);
+  background-color: rgba(10, 10, 10, 0.8); /* Le subí un poco la opacidad para que en mobile se lea bien sobre el mapa */
   backdrop-filter: blur(11.2px);
-  width: 45vw;
+  -webkit-backdrop-filter: blur(11.2px);
+  
+  /* 🚀 En mobile toman el 100% del contenedor padre (que mide 92vw) */
+  width: 100%; 
+  box-sizing: border-box; /* Clave para que los padding no ensanchen la tarjeta */
   border: solid 1px var(--current-color);
   pointer-events: auto;
 }
 
 .comisaria {
-  position: relative; /* Eje de coordenadas seguro para la cruz de cierre */
-  max-width: 180px;
+  position: relative;
+  max-width: none; /* Quitamos el tope en mobile */
   padding: 1.5rem 1.5rem 0.8rem 0.8rem;
   display: flex;
   flex-direction: column;
@@ -54,28 +66,27 @@
    ========================================================================== */
 .title {
   font-family: "Ronnia Bold Condensed", sans-serif;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .authority {
   font-family: "Ronnia Bold Condensed", sans-serif;
-  font-size: 1rem;
-  max-width: 30vw;
+  font-size: 1.1rem;
+  max-width: 100%; /* Que use todo el ancho de la tarjeta en celu */
 }
 
 .grade {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .address,
-.date {
+.date,
+.phone {
   font-family: "Ronnia Thin Condensed", sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .phone {
-  font-family: "Ronnia Thin Condensed", sans-serif;
-  font-size: 0.9rem;
   padding-bottom: 1vh;
 }
 
@@ -94,13 +105,13 @@
    ========================================================================== */
 .moreButton {
   width: 100px;
-  padding: 0.3vh 0.5vw;
+  padding: 6px 12px;
   align-self: center;
   border: solid 1px var(--current-color);
   border-radius: 14px;
   color: var(--current-color);
   box-shadow: 1px 1px 0 1px var(--current-color);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   text-align: center;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
@@ -109,13 +120,12 @@
 .moreButton:hover {
   color: var(--mapa-gris);
   background-color: var(--current-color);
-  box-shadow: 1px 1px 0 1px var(--current-color);
 }
 
 .closeButton {
   position: absolute;
-  top: 0.3rem;
-  right: 0.2rem;
+  top: 0.4rem;
+  right: 0.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,34 +134,30 @@
   background: none;
   color: var(--current-color);
   cursor: pointer;
+  font-size: 1.2rem;
 }
 
 /* ==========================================================================
    5. MODIFICADORES DE COLOR DINÁMICOS
    ========================================================================== */
-.esComisaria {
-  --current-color: var(--alerta-comisarias) !important;
-}
-
-.esGatillo {
-  --current-color: var(--alerta-gatillo)!important;
-}
-
-.esReporte {
-  --current-color: var(--alerta-reportes)!important;
-}
+.esComisaria { --current-color: var(--alerta-comisarias) !important; }
+.esGatillo { --current-color: var(--alerta-gatillo) !important; }
+.esReporte { --current-color: var(--alerta-reportes) !important; }
 
 /* ==========================================================================
-   6. MEDIA QUERIES (Responsivo Escritorio PC)
+   6. MEDIA QUERIES (Responsivo Escritorio PC - TU DISEÑO ORIGINAL EXACTO)
    ========================================================================== */
 @media (min-width: 1200px) {
   .SelectionOverview {
     top: 200px;
-    right:100px; /* 🎯 Alineación perfecta con el margen de tus filtros en PC */
+    right: 100px; /* 🎯 Vuelve a su lugar sincronizado a la derecha */
     left: auto;
     bottom: auto;
-    flex-direction: column;
+    flex-direction: column; /* En PC se apilan en vertical */
     justify-content: flex-start;
+    max-height: none;
+    overflow-y: visible;
+    width: auto;
   }
 
   .comisaria {
@@ -163,5 +169,9 @@
   .autoridadData {
     width: 14vw;
     max-width: 14vw;
+  }
+
+  .authority {
+    max-width: 30vw;
   }
 }

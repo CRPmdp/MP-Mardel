@@ -25,11 +25,13 @@ const iconComponents = {
 
   // Gatillo Facil
   gatillo_mapa: <GiGunshot />,
+  Gatillo: <GiGunshot />, // En opciones
   gatillo: <GiGunshot />, // En opciones
 
   // Reportes
   reportes_mapa: <TbAlertTriangle />, // En el mapa
   reportes: <TbAlertTriangle />, 
+  Reportes: <TbAlertTriangle />, 
   
 
 

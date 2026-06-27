@@ -1,67 +1,113 @@
+/* ==========================================================================
+   1. CONTENEDOR PRINCIPAL
+   ========================================================================== */
 .menuContainer {
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   backdrop-filter: blur(7.6px);
   -webkit-backdrop-filter: blur(7.6px);
-  padding-top: 8vh;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
+/* ==========================================================================
+   2. EL RECUADRO DEL MENÚ (3 COLUMNAS EN CELU)
+   ========================================================================== */
 .menu {
-  width: 100;
-  height: 90vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  width: 95vw; /* Aprovechamos un toque más el ancho en celulares */
+  height: auto;
+  max-height: 90vh; 
+  overflow-y: auto;
   background-color: var(--fondo-menu-herramientas);
+  
+  display: grid;
+  /* 🚀 CLAVE: 3 columnas fijas desde mobile */
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-auto-rows: max-content;
+  
+  justify-items: center;
+  align-items: center;
+  
+  padding: 20px 10px;
+  gap: 20px 10px; /* Separación de 20px vertical y 10px horizontal entre ítems */
+  border-radius: 20px;
+}
+
+/* ==========================================================================
+   3. ÍTEMS Y ENLACES
+   ========================================================================== */
+.menu > a {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  justify-items: center;
-  margin-left: 7vw;
+  text-decoration: none;
+  gap: 6px; /* Espaciado más compacto en celu */
+  width: 100%;
 }
 
+/* 🎯 Íconos más chicos para que entren 3 por fila en el celu */
 .icon {
-  width: 80px;
-  height: 80px;
+  width: 70px;  
+  height: 70px;
   color: var(--color-iconos-herramientas);
   background-color: var(--fondo-iconos-herramientas);
-  text-align: center;
-  border-radius: 14px;
+  border-radius: 12px; /* Un pelo menos de radio para que quede armónico */
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 20px 5px var(--fondo-menu-herramientas);
+  box-shadow: 0 0 12px 2px var(--fondo-menu-herramientas);
+  transition: all 0.2s ease;
 }
 
 .icon:hover {
-  width: 80px;
-  height: 80px;
-  color: var(--color-iconos-herramientas);
   background-color: var(--fondo-seleccion-iconos-herramientas);
-  text-align: center;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 20px 5px var(--fondo-seleccion-iconos-herramientas);
+  box-shadow: 0 0 12px 2px var(--fondo-seleccion-iconos-herramientas);
 }
 
 .iconName {
   color: var(--nombre-iconos-herramientas);
   text-align: center;
+  margin: 0;
+  padding: 0;
+  font-size: 11px; /* Tipografía más chica para evitar que se pisen los textos cortos */
+  font-family: sans-serif;
+  line-height: 1.2;
 }
 
-/*responsive*/
-@media (min-width: 1200px) {
+/* ==========================================================================
+   4. RESPONSIVO (ESCRITORIO / PANTALLAS GRANDES)
+   ========================================================================== */
+@media (min-width: 1000px) {
   .menuContainer {
-    width: 100vw;
     height: 97vh;
-    backdrop-filter: blur(7.6px);
-    -webkit-backdrop-filter: blur(7.6px);
     padding-top: 3vh;
+    padding: 0;
   }
 
   .menu {
-    width: 55vw;
-    margin-left: 30vw;
-    margin-top: 5vh;
+    width: 75vw;
+    max-height: none;
+    overflow-y: visible;
+    
+    /* Mantiene las 3 columnas pero con el espacio expandido de PC */
+    padding: 50px;
+    gap: 35px;
+  }
+
+  /* El cuadrado recupera su tamaño imponente de 120px en la PC */
+  .icon {
+    width: 120px;  
+    height: 120px;
+    border-radius: 14px;
+    box-shadow: 0 0 20px 5px var(--fondo-menu-herramientas);
+  }
+
+  .iconName {
+    font-size: 16px;
   }
 }

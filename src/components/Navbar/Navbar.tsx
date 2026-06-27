@@ -24,9 +24,6 @@ const Navbar = () => {
         <VscTools className={styles.Button} style={{ fontSize: "2rem" }} />
       </Link>
 
-      <Link to="investigaciones" title="investigaciones">
-        <BiBookReader className={styles.Button} style={{ fontSize: "2rem" }} />
-      </Link>
 
       <Link to="menu" title="menu">
         <IoAppsOutline className={styles.Button} style={{ fontSize: "2rem" }} />
