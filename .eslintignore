@@ -1,0 +1,6 @@
+build
+assets
+dist
+node_modules
+public
+vite.config.js
