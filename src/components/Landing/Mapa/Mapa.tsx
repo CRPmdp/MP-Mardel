@@ -15,24 +15,34 @@ import Filtros, { EstadoFiltros } from "../Filtros/Filtros";
 import SelectionOverview from "../SelectionOverview/SelectionOverview";
 import { limpiarCapasBase } from "./mapaUtils"; 
 
+// IMPORTANTE: Importamos las funciones optimizadas desde nuestro servicio centralizado
+import {
+  getDataDeCasosDependencias,
+  getDataDeCasosGatillo,
+  getDataDeCasosReportes,
+} from "../../../services/fetching"; 
+
 const Mapa = () => {
-  const [ciudadActiva, setCiudadActiva] = useState("mar-del-plata");
+  // Estado que controla qué ciudad está activa en la visualización
+  const [ciudadActiva, setCiudadActiva] = useState<string>("mar-del-plata");
   
+  // Estados independientes para almacenar las colecciones de datos GeoJSON Geo-referenciados
   const [dependencias, setDependencias] = useState<any>(null);
   const [gatillos, setGatillos] = useState<any>(null);
   const [reportes, setReportes] = useState<any>(null);
 
+  // Filtros de visibilidad por capas (Activos por defecto)
   const [filtros, setFiltros] = useState<EstadoFiltros>({
     dependencias: true,
     reportes: true,
     gatillo: true,
   });
 
+  // Estados para gestionar la selección e interactividad con los marcadores del mapa
   const [selectedMarkerId, setSelectedMarkerId] = useState<string | null>(null);
   const [selectedCase, setSelectedCase] = useState<any>(null);
 
-  const configActual = REGIONES_CONFIG[ciudadActiva];
-  
+  //
   const handleToggleFilter = (capa: keyof EstadoFiltros) => {
     setFiltros((prev) => ({
       ...prev,
@@ -40,64 +50,98 @@ const Mapa = () => {
     }));
   };
 
+  // Obtenemos las coordenadas de inicio, zoom y límites del mapa según la región activa
+  const configActual = REGIONES_CONFIG[ciudadActiva] || REGIONES_CONFIG["mar-del-plata"];
+
+  if (!configActual) {
+    return null; 
+  }
+
+  // useEffect reactivo: Se dispara cada vez que cambia "ciudadActiva"
   useEffect(() => {
-    setDependencias(null);
-    setGatillos(null);
-    setReportes(null);
-    setSelectedMarkerId(null);
-    setSelectedCase(null);
+    let isMounted = true;
 
-    fetch(`/data/${ciudadActiva}/dependencias.json`)
-      .then((res) => res.json())
-      .then((data) => setDependencias(data))
-      .catch((err) => console.error(err));
+    const cargarDatosDeCiudad = async () => {
+      try {
+        // 1. Limpiamos estados anteriores para evitar que se muestren pines viejos en la nueva ubicación
+        setDependencias(null);
+        setGatillos(null);
+        setReportes(null);
+        setSelectedMarkerId(null);
+        setSelectedCase(null);
 
-    fetch(`/data/${ciudadActiva}/gatillo-facil.json`)
-      .then((res) => res.json())
-      .then((data) => setGatillos(data))
-      .catch((err) => console.error(err));
+        // 2. Realizamos los fetches concurrentes en paralelo con Promise.all (Mucho más rápido)
+        const [dataDeps, dataGatillos, dataReportes] = await Promise.all([
+          getDataDeCasosDependencias(ciudadActiva),
+          getDataDeCasosGatillo(ciudadActiva),
+          getDataDeCasosReportes(ciudadActiva),
+        ]);
 
-    fetch(`/data/${ciudadActiva}/reportes.json`)
-      .then((res) => res.json())
-      .then((data) => setReportes(data))
-      .catch((err) => console.error(err));
+        // 3. Si el componente sigue montado, actualizamos el estado global de capas
+        if (isMounted) {
+          setDependencias(dataDeps);
+          setGatillos(dataGatillos);
+          setReportes(dataReportes);
+        }
+      } catch (error) {
+        console.error(`Error al cargar capas de datos para la región: ${ciudadActiva}`, error);
+      }
+    };
+
+    cargarDatosDeCiudad();
+
+    // Función de limpieza para prevenir race-conditions si el usuario cambia rápido de ciudad
+    return () => {
+      isMounted = false;
+    };
   }, [ciudadActiva]);
 
   return (
-    <section className={styles.Mapa}>
+    <section className={styles.mapaContainer}>
+      <LogoMapa ocultarEnMobile={true} />
       
-     {/* 2. LOGO FLOTANTE CENTRALIZADO */}
-      <LogoMapa 
-        nombreCiudad={configActual?.nombre} 
-        ocultarEnMobile={!!selectedCase} // Si hay caso seleccionado, pasa como true
-      />
-      {/* 3. FILTROS FLOTANTES (Esquina superior derecha) */}
+      {/* Selector de Ciudades para activar el dinamismo */}
+      <div className={styles.selectorCiudadContainer}>
+        <select 
+          className={styles.selectorCiudad}
+          value={ciudadActiva} 
+          onChange={(e) => setCiudadActiva(e.target.value)}
+        >
+          <option value="mar-del-plata">Mar del Plata</option>
+          <option value="caba">CABA</option>
+        </select>
+      </div>
+
+      {/* Componente de Filtros de Capas */}
       <Filtros filtros={filtros} onToggleFilter={handleToggleFilter} />
-      
+
+      {/* Panel informativo lateral del caso seleccionado */}
       <SelectionOverview 
         caso={selectedCase} 
         onClose={() => {
-          setSelectedCase(null);       // Al cerrar, limpiamos el caso activo
-          setSelectedMarkerId(null);   // Y despintamos el pin del mapa
+          setSelectedCase(null);       // Limpiamos el caso activo
+          setSelectedMarkerId(null);   // Y despintamos el pin seleccionado del mapa
         }} 
       />
 
+      {/* Contenedor del Mapa MapLibreGL */}
       <MapGL
-        key={ciudadActiva}
+        key={ciudadActiva} // CRUCIAL: Forzar la recreación/re-renderizado limpio del canvas al cambiar de ciudad
         id="mapa"
         mapLib={maplibregl}
         initialViewState={{
           longitude: configActual.longitude,
           latitude: configActual.latitude,
           zoom: configActual.zoom,
-          maxBounds: configActual.maxBounds,
         }}
         minZoom={configActual.minZoom}
+        maxBounds={configActual.maxBounds}
         style={{ width: "100vw", height: "100vh" }}
-        mapStyle="https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json"
+        mapStyle="https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json?api_key=11519e9b-8a23-4b00-9cfc-82a2447d6be7"
         onLoad={(e) => limpiarCapasBase(e.target)}
       >
         
+        {/* Renderizado condicional de marcadores según datos cargados y filtros activos */}
         {dependencias && filtros.dependencias && (
           <DependenciasMarkers
             dependencias={dependencias}

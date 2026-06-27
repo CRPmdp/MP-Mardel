@@ -8,7 +8,7 @@ import {
   getDataDeCasosDependencias,
   getDataDeCasosGatillo,
   getDataDeCasosReportes,
-} from "../data/fetching";
+} from "../services/fetching";
 import type {
   CasoDependencia,
   CasoGatillo,

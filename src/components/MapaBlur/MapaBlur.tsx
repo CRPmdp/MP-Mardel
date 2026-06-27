@@ -15,6 +15,11 @@ const MapaBlur = () => {
   // 3. Obtenemos los datos geográficos de la ciudad seleccionada
   const configActual = REGIONES_CONFIG[ciudadActiva];
 
+  // Si configActual no carga
+  if (!configActual) {
+    return null; 
+  }
+
   return (
     <section id="MapaDev" className={styles.MapaDev}>
       <Link to="/denuncia">
@@ -36,11 +41,11 @@ const MapaBlur = () => {
           // Le bajamos 1 punto al zoom original de la ciudad para que se vea 
           // un toque más alejado y abstracto, ideal para un fondo decorativo
           zoom: configActual.zoom - 1, 
-          maxBounds: configActual.maxBounds,
         }}
         minZoom={configActual.minZoom}
+        maxBounds={configActual.maxBounds}
         style={{ width: "100vw", height: "100vh" }}
-        mapStyle="https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json"
+        mapStyle="https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json?api_key=11519e9b-8a23-4b00-9cfc-82a2447d6be7"
       >
         {/* 4. COMENTADO TEMPORALMENTE:
           Sacamos los barrios de CABA para que no rompa en Mar del Plata.

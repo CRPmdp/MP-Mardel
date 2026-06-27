@@ -100,9 +100,9 @@ const SelectionOverview = ({ caso, onClose }: Props) => {
 
   // Evaluamos el tipo de caso para inyectar la clase de color correspondiente
   let colorClass = "";
-  if (casoIsCasoDependencia(caso)) colorClass = styles.esComisaria;
-  if (casoIsCasoGatillo(caso)) colorClass = styles.esGatillo;
-  if (casoIsCasoReportes(caso)) colorClass = styles.esReporte;
+  if (casoIsCasoDependencia(caso)) colorClass = styles.esComisaria ?? "";
+  if (casoIsCasoGatillo(caso)) colorClass = styles.esGatillo ?? "";
+  if (casoIsCasoReportes(caso)) colorClass = styles.esReporte ?? "";
 
   console.log("%c🔍 DIAGNÓSTICO OVERVIEW", "color: #00ffcc; font-weight: bold; font-size: 12px;");
   console.log("1. Datos crudos del caso cliqueado:", caso?.properties);

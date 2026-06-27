@@ -1,22 +1,14 @@
-import Icons from "../Iconos/Icons";
 import { Link } from "react-router-dom";
+
+import Icons from "../Iconos/Icons";
 import styles from "./Menu.module.css";
 
 const menuItems = [
   { path: "/", icon: "mapa" },
   { path: "/denuncia", icon: "denuncias" },
   { path: "/recursos", icon: "recursos" },
-  { path: "/investigaciones", icon: "investigaciones" },
-  {
-    path: "/reportes",
-    icon: "Reportes",
-  },
+  { path: "/reportes", icon: "Reportes", },
   { path: "/gatillo-facil", icon: "Gatillo" },
-  { path: "/ahora", icon: "AHORA" },
-  {
-    path: "https://open.spotify.com/show/1fhXtCulH39aZgv9P7WH7k",
-    icon: "podcast",
-  },
   { path: "/nosotrxs", icon: "contacto" },
 ];
 

@@ -1,8 +1,10 @@
 import { useContext } from "react";
-import styles from "./GatilloFacil.module.css";
 import { Link } from "react-router-dom";
-import Icons from "../Iconos/Icons";
+
 import { CasosGatilloContext } from "../../routes/Root";
+import Icons from "../Iconos/Icons";
+import styles from "./GatilloFacil.module.css";
+
 
 const GatilloFacil = () => {
   const casesData = useContext(CasosGatilloContext);

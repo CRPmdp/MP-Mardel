@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styles from "./FichaAutorxs.module.css";
 import type { Autor } from "../../../models/autorxs";
-import { fetchAutor } from "../../../data/fetching";
+import { fetchAutor } from "../../../services/fetching";
 
 const FichaAutorxs = () => {
   const { enlaceVer } = useParams(); // Usa el nombre del parámetro de la URL

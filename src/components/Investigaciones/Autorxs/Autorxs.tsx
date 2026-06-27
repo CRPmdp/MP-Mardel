@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styles from "./Autorxs.module.css";
 import type { Autor } from "../../../models/autorxs";
-import { fetchAutorxs } from "../../../data/fetching";
+import { fetchAutorxs } from "../../../services/fetching";
 
 const Autorxs = () => {
   const [autorxsData, setAutorxsData] = useState<"error" | "loading" | Autor[]>(

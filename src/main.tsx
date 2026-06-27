@@ -45,10 +45,8 @@ import Organizate from "./components/Recurso/Organizate";
 import Jefatura from "./components/Jefatura/Jefatura";
 import Nosotrxs from "./components/Nosotrxs/Nosotrxs";
 import Menu from "./components/Menu/Menu";
-import Podcast from "./components/Podcast/Podcast";
 import GatilloFacil from "./components/GatilloFacil/GatilloFacil";
 import Ficha from "./components/Fichas/Ficha";
-import Ahora from "./components/Ahora/Ahora";
 
 // ==========================================
 // CONFIGURACIÓN DE ENRUTAMIENTO (HashRouter)
@@ -67,7 +65,6 @@ const router = createHashRouter([
       { path: "/reportes", element: <Reportes /> },
       { path: "/nosotrxs", element: <Nosotrxs /> },
       { path: "/menu", element: <Menu /> },
-      { path: "/podcast", element: <Podcast /> },
       { path: "/gatillo-facil", element: <GatilloFacil /> },
       { path: "/recursos/:dominio", element: <Recurso /> },
       { path: "/organizate", element: <Organizate /> },
@@ -76,7 +73,6 @@ const router = createHashRouter([
       { path: "/investigacion/:dominio", element: <Investigacion /> },
       { path: "/lista", element: <TodasInvestigaciones /> },
       { path: "/ficha/:Contador", element: <Ficha /> },
-      { path: "/ahora", element: <Ahora /> },
       { path: "/cuarto-reporte", element: <CuartoReporte /> },
       { path: "/quinto-reporte", element: <QuintoReporte /> },
       { path: "/sexto-reporte", element: <SextoReporte /> },
