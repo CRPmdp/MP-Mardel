@@ -1,6 +1,5 @@
 .denuncia-form-container {
   max-width: 800px;
-  /* margin bottom igual a la altura del navbar en mobile */
   margin: 0 auto 60px auto;
   padding: 2rem;
   background: #fff;

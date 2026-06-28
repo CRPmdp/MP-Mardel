@@ -98,9 +98,9 @@ const Mapa = () => {
 
   return (
     <section className={styles.mapaContainer}>
-      <LogoMapa ocultarEnMobile={true} />
+     
       
-      {/* Selector de Ciudades para activar el dinamismo */}
+       {/* Selector de Ciudades para activar el dinamismo 
       <div className={styles.selectorCiudadContainer}>
         <select 
           className={styles.selectorCiudad}
@@ -110,7 +110,9 @@ const Mapa = () => {
           <option value="mar-del-plata">Mar del Plata</option>
           <option value="caba">CABA</option>
         </select>
-      </div>
+      </div>*/}
+
+       <LogoMapa nombreCiudad={configActual.nombre} ocultarEnMobile={true} />
 
       {/* Componente de Filtros de Capas */}
       <Filtros filtros={filtros} onToggleFilter={handleToggleFilter} />

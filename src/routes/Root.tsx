@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
-import Navbar from "../components/Navbar/Navbar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import styles from "./Root.module.css";
 import type { Cargo } from "../models/cargos";
 import {
@@ -80,7 +80,7 @@ export default function Root() {
         <CasosGatilloContext.Provider value={casosGatillo}>
           <CargosContext.Provider value={cargos}>
             <section className={styles.root}>
-              <Navbar />
+              <Sidebar />
               <Outlet />
             </section>
           </CargosContext.Provider>

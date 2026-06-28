@@ -1,5 +1,5 @@
 /* Estilos celular */
-.Navbar {
+.Sidebar {
   position: fixed;
   bottom: 0;
   z-index: 6000;
@@ -25,7 +25,7 @@
 
 /* tablet / PC */
 @media (min-width: 768px) {
-  .Navbar {
+  .Sidebar {
     position: relative;
     flex-shrink: 0;
     width: 10vw;

@@ -1,4 +1,4 @@
-import styles from "./Navbar.module.css";
+import styles from "./Sidebar.module.css";
 import { Link } from "react-router-dom";
 import { BsMegaphone } from "react-icons/bs";
 import { VscTools } from "react-icons/vsc";
@@ -6,9 +6,9 @@ import { TbZoomExclamation } from "react-icons/tb";
 import { BiBookReader } from "react-icons/bi";
 import { IoAppsOutline } from "react-icons/io5";
 
-const Navbar = () => {
+const Sidebar = () => {
   return (
-    <section id="NavBar" className={styles.Navbar}>
+    <section id="Sidebar" className={styles.Sidebar}>
       <Link to="/" title="mapa">
         <TbZoomExclamation
           className={styles.Button}
@@ -32,4 +32,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Sidebar;
