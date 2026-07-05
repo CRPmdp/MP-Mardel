@@ -1,4 +1,4 @@
-import Mapa from "./components/Landing/Mapa/Mapa";
+import Mapa from "./features/mapa/Mapa";
 
 const App = () => {
   return <Mapa />;
