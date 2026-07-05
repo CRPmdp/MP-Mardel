@@ -19,6 +19,8 @@ import {
   RiForbid2Line,
   RiSdCardLine,
 } from "react-icons/ri";
+import { IoAppsOutline } from "react-icons/io5";
+
 import { PiReadCvLogoBold } from "react-icons/pi";
 
 const iconComponents = {
@@ -32,12 +34,13 @@ const iconComponents = {
   reportes_mapa: <TbAlertTriangle />, // En el mapa
   reportes: <TbAlertTriangle />, 
   Reportes: <TbAlertTriangle />, 
-  
-
 
   // usados
-  AHORA: <RiSdCardLine />,
   
+  // Sidebar
+  menu: <IoAppsOutline />,
+  
+  //
   autorx: <SlPencil />,
   ilus: <HiOutlinePhoto />,
   denuncias: <BsMegaphone />,
