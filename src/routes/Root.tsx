@@ -1,14 +1,17 @@
 import { Outlet } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar/Sidebar";
+
 import styles from "./Root.module.css";
-import type { Cargo } from "../models/cargos";
+import Sidebar from "../components/Sidebar/Sidebar";
+
 import {
   getCargos,
   getDataDeCasosDependencias,
   getDataDeCasosGatillo,
   getDataDeCasosReportes,
 } from "../services/fetching";
+
+import type { Cargo } from "../models/cargos";
 import type {
   CasoDependencia,
   CasoGatillo,

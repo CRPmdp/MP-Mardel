@@ -17,36 +17,35 @@ import Root from "./routes/Root";
 import App from "./App";
 
 // ==========================================
-// 4. COMPONENTES DE PÁGINAS (En PascalCase)
+// 4. MAIN PÁGINAS (En PascalCase)
 // ==========================================
 // Bloque Denuncias
-import DenunciaForm from "./components/DenunciaForm/DenunciaForm";
-import Denuncias from "./components/Denuncias/Denuncias";
+import DenunciaForm from "./features/denuncias/DenunciaForm/DenunciaForm";
+import Denuncias from "./features/denuncias/Denuncias";
 
 // Bloque Reportes
-import Reportes from "./components/Reportes/Reportes";
-import CuartoReporte from "./components/Reportes/CuartoReporte";
-import QuintoReporte from "./components/Reportes/QuintoReporte";
-import SextoReporte from "./components/Reportes/SextoReporte";
+import Reportes from "./features/reportes/Reportes";
+import CuartoReporte from "./features/reportes/CuartoReporte";
+import QuintoReporte from "./features/reportes/QuintoReporte";
+import SextoReporte from "./features/reportes/SextoReporte";
 
 // Bloque Investigaciones
-import Investigaciones from "./components/Investigaciones/Investigaciones";
-import TodasInvestigaciones from "./components/Investigaciones/TodasInvest/TodasInvestigaciones";
-import Investigacion from "./components/Investigaciones/Investigacion/Investigacion";
-import Autorxs from "./components/Investigaciones/Autorxs/Autorxs";
-import FichaAutorxs from "./components/Investigaciones/Autorxs/FichaAutorxs";
+import Investigaciones from "./features/investigaciones/Investigaciones";
+import TodasInvestigaciones from "./features/investigaciones/TodasInvest/TodasInvestigaciones";
+import Investigacion from "./features/investigaciones/Investigacion/Investigacion";
+import Autorxs from "./features/investigaciones/Autorxs/Autorxs";
+import FichaAutorxs from "./features/investigaciones/Autorxs/FichaAutorxs";
 
 // Bloque Recursos
-import Recursos from "./components/Recursos/Recursos";
-import Recurso from "./components/Recurso/Recurso";
-import Organizate from "./components/Recurso/Organizate";
+import Recursos from "./features/recursero/Recursero";
+import Recurso from "./features/recursero/Recursos/Recursos";
+import Organizate from "./features/recursero/Recursos/Organizate";
 
 // Bloque Institucional y Otros
-import Jefatura from "./components/Jefatura/Jefatura";
 import Nosotrxs from "./components/Nosotrxs/Nosotrxs";
 import Menu from "./components/Menu/Menu";
-import GatilloFacil from "./components/GatilloFacil/GatilloFacil";
-import Ficha from "./components/Fichas/Ficha";
+import GatilloFacil from "./features/gatilloFacil/GatilloFacil";
+import Ficha from "./features/gatilloFacil/Fichas/Ficha";
 
 // ==========================================
 // CONFIGURACIÓN DE ENRUTAMIENTO (HashRouter)
@@ -58,24 +57,14 @@ const router = createHashRouter([
     children: [
       { path: "/", element: <App /> },
       { path: "/denuncias", element: <Denuncias /> },
-      { path: "/denuncia", element: <DenunciaForm /> },
+      { path: "/form-denuncia", element: <DenunciaForm /> },
       { path: "/recursos", element: <Recursos /> },
-      { path: "/investigaciones", element: <Investigaciones /> },
-      { path: "/jefatura", element: <Jefatura /> },
-      { path: "/reportes", element: <Reportes /> },
       { path: "/nosotrxs", element: <Nosotrxs /> },
       { path: "/menu", element: <Menu /> },
       { path: "/gatillo-facil", element: <GatilloFacil /> },
       { path: "/recursos/:dominio", element: <Recurso /> },
-      { path: "/organizate", element: <Organizate /> },
-      { path: "/autorxs", element: <Autorxs /> },
       { path: "/:enlaceVer", element: <FichaAutorxs /> },
-      { path: "/investigacion/:dominio", element: <Investigacion /> },
-      { path: "/lista", element: <TodasInvestigaciones /> },
       { path: "/ficha/:Contador", element: <Ficha /> },
-      { path: "/cuarto-reporte", element: <CuartoReporte /> },
-      { path: "/quinto-reporte", element: <QuintoReporte /> },
-      { path: "/sexto-reporte", element: <SextoReporte /> },
     ],
   },
 ]);
