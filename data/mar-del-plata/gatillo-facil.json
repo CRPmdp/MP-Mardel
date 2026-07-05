@@ -11,40 +11,20 @@
       "type": "Feature",
       "properties": {
         "Contador": "mdp-g-1",
-        "Nombre": "Facundo Morales",
-        "Edad": 22,
-        "Año": 2021,
-        "Fecha": "14/04/2021",
-        "cronica": "Durante un control vehicular en la zona oeste de la ciudad, un efectivo de la Policía Bonaerense disparó contra el joven que se movilizaba en moto tras una supuesta evasión del retén. Se constató posteriormente que la víctima no portaba armas de ningún tipo.",
+        "Nombre": "Brandon Romero",
+        "Edad": 18,
+        "Año": 2020,
+        "Fecha": "5/07/2020",
+        "cronica": "Ocurrió el 5 de julio de 2020 en la Ruta 226, cerca de Mar del Plata. Brandon, un joven de 18 años, fue asesinado de siete balazos por el policía bonaerense Pedro Arcángel Bogado.",
         "Barrio": "Barrio Regional",
-        "Direccion": "Av. Luro y Calle 180",
+        "Direccion": "Ruta 226",
         "link": "https://www.ejemplo-prensa-mdp.com.ar/caso-facundo-morales",
-        "policia_involucrado": "Suboficial Carlos Méndez",
+        "policia_involucrado": "Pedro Arcángel Bogado",
         "fuerza_involucrada": "Policía Bonaerense"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [-57.5855, -37.9942]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Contador": "mdp-g-2",
-        "Nombre": "Lautaro Maidana",
-        "Edad": 19,
-        "Año": 2023,
-        "Fecha": "05/09/2023",
-        "cronica": "El joven falleció tras recibir un disparo por la espalda por parte de un policía de civil durante una supuesta persecución en las inmediaciones de la zona comercial del puerto. Testigos del hecho afirmaron que la víctima se encontraba desarmada y ya se había rendido.",
-        "Barrio": "Barrio Progreso",
-        "Direccion": "Av. Edison y Av. Juan B. Justo",
-        "link": "https://www.ejemplo-prensa-mdp.com.ar/justicia-por-lautaro",
-        "policia_involucrado": "",
-        "fuerza_involucrada": "Policía Bonaerense"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-57.5612, -38.0321]
       }
     }
   ]
